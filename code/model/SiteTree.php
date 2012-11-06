@@ -2069,11 +2069,11 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 	 * @return FieldList The available actions for this page.
 	 */
 	public function getCMSActions() {
-		// Major actions are the buttons that are used almost every time.
+		// Popular actions are the buttons that are used almost every time.
 		$popularActions = CompositeField::create()->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
-		// Minor actions will be hidden behind a drop-up, and are the less frequently used actions.
-		$minorActions = new Tab('MinorActions');
-		$moreOptions = new TabSet('MoreOptions');
+		// Minor actions will be hidden behind a drop-up as links, and are the less frequently used.
+		$minorActions = new Tab('MoreOptions', 'More options');
+		$moreOptions = new TabSet('MoreOptionsTabSet');
 		$moreOptions->push($minorActions);
 		$moreOptions->addExtraClass('ss-ui-action-tabset');
 
@@ -2094,7 +2094,7 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 			$minorActions->push(
 				FormAction::create('unpublish', _t('SiteTree.BUTTONUNPUBLISH', 'Unpublish'), 'delete')
 					->setDescription(_t('SiteTree.BUTTONUNPUBLISHDESC', 'Remove this page from the published site'))
-					->addExtraClass('ss-ui-action-destructive')->setAttribute('data-icon', 'unpublish')
+					->addExtraClass('ss-ui-action-destructive')
 			);
 		}
 
@@ -2130,7 +2130,6 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 					// "delete"
 					$minorActions->push(
 						FormAction::create('delete',_t('CMSMain.DELETE','Delete draft'))->addExtraClass('delete ss-ui-action-destructive')
-							->setAttribute('data-icon', 'decline')
 					);
 				}
 			

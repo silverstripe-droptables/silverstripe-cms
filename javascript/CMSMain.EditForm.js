@@ -311,7 +311,7 @@
 		});
 
 		/**
-		 * Enable "save draft" button upon detecting changes to content.
+		 * Enable save buttons upon detecting changes to content.
 		 * "changed" class is added by jQuery.changetracker.
 		 */
 		$('.cms-edit-form .changed').entwine({
