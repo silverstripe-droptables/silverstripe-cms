@@ -310,6 +310,34 @@
 			}
 		});
 
+		$('.cms-edit-form .Actions #Form_EditForm_action_publish').entwine({
+			/**
+			 * Bind to ssui.button event to trigger stylistic changes.
+			 */
+			onbuttonafterrefreshalternate: function() {
+				if (this.button('option', 'showingAlternate')) {
+					this.addClass('ss-ui-action-constructive');
+				}
+				else {
+					this.removeClass('ss-ui-action-constructive');
+				}
+			}
+		});
+
+		$('.cms-edit-form .Actions #Form_EditForm_action_save').entwine({
+			/**
+			 * Bind to ssui.button event to trigger stylistic changes.
+			 */
+			onbuttonafterrefreshalternate: function() {
+				if (this.button('option', 'showingAlternate')) {
+					this.addClass('ss-ui-action-constructive');
+				}
+				else {
+					this.removeClass('ss-ui-action-constructive');
+				}
+			}
+		});
+
 		/**
 		 * Class: .cms-edit-form.CMSPageSettingsController input[name="ParentType"]:checked
 		 *
