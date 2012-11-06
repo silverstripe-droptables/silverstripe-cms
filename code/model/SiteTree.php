@@ -2070,14 +2070,12 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 	 */
 	public function getCMSActions() {
 		// Major actions are the buttons that are used almost every time.
-		$majorActions = CompositeField::create()->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
+		$popularActions = CompositeField::create()->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
 		// Minor actions will be hidden behind a drop-up, and are the less frequently used actions.
 		$minorActions = new Tab('MinorActions');
 		$moreOptions = new TabSet('MoreOptions');
 		$moreOptions->push($minorActions);
 		$moreOptions->addExtraClass('ss-ui-action-tabset');
-
-		$actions = new FieldList(array($majorActions, $moreOptions));
 
 		// "readonly"/viewing version that isn't the current version of the record
 		$stageOrLiveRecord = Versioned::get_one_by_stage($this->class, Versioned::current_stage(), sprintf('"SiteTree"."ID" = %d', $this->ID));
@@ -2114,16 +2112,16 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 			if($this->IsDeletedFromStage) {
 				if($this->ExistsOnLive) {
 					// "restore"
-					$minorActions->push(FormAction::create('revert',_t('CMSMain.RESTORE','Restore')));
+					$popularActions->push(FormAction::create('revert',_t('CMSMain.RESTORE','Restore')));
 					if($this->canDelete() && $this->canDeleteFromLive()) {
 						// "delete from live"
-						$minorActions->push(
+						$popularActions->push(
 							FormAction::create('deletefromlive',_t('CMSMain.DELETEFP','Delete'))->addExtraClass('ss-ui-action-destructive')
 						);
 					}
 				} else {
 					// "restore"
-					$minorActions->push(
+					$popularActions->push(
 						FormAction::create('restore',_t('CMSMain.RESTORE','Restore'))->setAttribute('data-icon', 'decline')
 					);
 				}
@@ -2137,7 +2135,7 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 				}
 			
 				// "save"
-				$majorActions->push(
+				$popularActions->push(
 					FormAction::create('save', _t('SiteTree.BUTTONSAVED', 'Saved'))
 						->setAttribute('data-icon', 'accept')
 						->setAttribute('data-icon-alternate', 'addpage')
@@ -2148,7 +2146,7 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 
 		if($this->canPublish() && !$this->IsDeletedFromStage) {
 			// "publish"
-			$majorActions->push(
+			$popularActions->push(
 				$publish = FormAction::create('publish', _t('SiteTree.BUTTONPUBLISHED', 'Published'))
 					->setAttribute('data-icon', 'accept')
 					->setAttribute('data-icon-alternate', 'disk')
@@ -2162,8 +2160,15 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 		
 		// getCMSActions() can be extended with updateCMSActions() on a extension
 		$this->extend('updateCMSActions', $actions);
-		
-		return $actions;
+
+		$allActions = array();
+		if ($popularActions->getChildren()->count()) {
+			$allActions[] = $popularActions;
+		}
+		if ($minorActions->getChildren()->count()) {
+			$allActions[] = $moreOptions;
+		}
+		return new FieldList($allActions);
 	}
 	
 	/**
