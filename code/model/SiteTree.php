@@ -2069,8 +2069,15 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 	 * @return FieldList The available actions for this page.
 	 */
 	public function getCMSActions() {
-		$minorActions = CompositeField::create()->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
-		$actions = new FieldList($minorActions);
+		// Major actions are the buttons that are used almost every time.
+		$majorActions = CompositeField::create()->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
+		// Minor actions will be hidden behind a drop-up, and are the less frequently used actions.
+		$minorActions = new Tab('MinorActions');
+		$moreOptions = new TabSet('MoreOptions');
+		$moreOptions->push($minorActions);
+		$moreOptions->addExtraClass('ss-ui-action-tabset');
+
+		$actions = new FieldList(array($majorActions, $moreOptions));
 
 		// "readonly"/viewing version that isn't the current version of the record
 		$stageOrLiveRecord = Versioned::get_one_by_stage($this->class, Versioned::current_stage(), sprintf('"SiteTree"."ID" = %d', $this->ID));
@@ -2130,18 +2137,27 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 				}
 			
 				// "save"
-				$minorActions->push(
-					FormAction::create('save',_t('CMSMain.SAVEDRAFT','Save Draft'))->setAttribute('data-icon', 'addpage')
+				$majorActions->push(
+					FormAction::create('save', _t('SiteTree.BUTTONSAVED', 'Saved'))
+						->setAttribute('data-icon', 'accept')
+						->setAttribute('data-icon-alternate', 'addpage')
+						->setAttribute('data-text-alternate', _t('CMSMain.SAVEDRAFT','Save draft'))
 				);
 			}
 		}
 
 		if($this->canPublish() && !$this->IsDeletedFromStage) {
 			// "publish"
-			$actions->push(
-				FormAction::create('publish', _t('SiteTree.BUTTONSAVEPUBLISH', 'Save & Publish'))
-					->addExtraClass('ss-ui-action-constructive')->setAttribute('data-icon', 'accept')
+			$majorActions->push(
+				$publish = FormAction::create('publish', _t('SiteTree.BUTTONPUBLISHED', 'Published'))
+					->setAttribute('data-icon', 'accept')
+					->setAttribute('data-icon-alternate', 'disk')
+					->setAttribute('data-text-alternate', _t('SiteTree.BUTTONSAVEPUBLISH', 'Save & publish'))
 			);
+
+			if($this->stagesDiffer('Stage', 'Live')) {
+				$publish->addExtraClass('ss-ui-alternate');
+			}
 		}
 		
 		// getCMSActions() can be extended with updateCMSActions() on a extension
