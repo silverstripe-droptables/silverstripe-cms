@@ -1,7 +1,7 @@
 <div class="ss-ui-action-tabset cms-actions-row ss-tabset tabset ui-tabs ui-widget ui-widget-content ui-corner-all">
 	<ul class="ui-tabs-nav multi ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">	
 		<li class="first">			
-			<a href="#Action_AddPage" id="tab-Action_AddPage" class="tab-nav-link">
+			<a href="#Action_AddPage" id="tab-Action_AddPage" class="active tab-nav-link">
 				<span class="ui-button-icon-primary ui-icon btn-icon-add"></span>
 				<span class="title">Add page</span>
 			</a>
