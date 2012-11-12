@@ -9,7 +9,7 @@
 		<li class="middle">
 			<input class="batch-check" id="view-mode-batchactions" name="view-mode-batchactions" type="checkbox" />
 			<a href="#Action_Batch" class="tab-nav-link view-mode-batchactions-wrapper">
-				<span class="ui-button-icon-primary ui-icon"></span>
+				<span class="ui-button-icon-primary ui-icon ui-no-icon"></span>
 				<span class="title"><% _t("CMSPagesController_ContentToolbar.ss.ACTIONS","Actions") %></span>
 			</a>
 		</li>
