@@ -1,5 +1,5 @@
-<div class="ss-ui-action-tabset cms-actions-row ss-tabset tabset ui-tabs ui-widget ui-widget-content ui-corner-all">
-	<ul class="ui-tabs-nav multi ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">	
+<div class="ss-ui-action-tabset multi cms-actions-row ss-tabset tabset ui-tabs ui-widget ui-widget-content ui-corner-all">
+	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">	
 		<li class="first">			
 			<a href="#Action_AddPage" id="tab-Action_AddPage" class="active tab-nav-link">
 				<span class="ui-button-icon-primary ui-icon btn-icon-add"></span>
@@ -8,7 +8,7 @@
 		</li>
 		<li class="middle">
 			<input class="batch-check" id="view-mode-batchactions" name="view-mode-batchactions" type="checkbox" />
-			<a href="#Action_Batch" class="tab-nav-link view-mode-batchactions-wrapper" id="tab-Action_Action_Batch">
+			<a href="#Action_Batch" class="tab-nav-link view-mode-batchactions-wrapper">
 				<span class="ui-button-icon-primary ui-icon"></span>
 				<span class="title"><% _t("CMSPagesController_ContentToolbar.ss.ACTIONS","Actions") %></span>
 			</a>

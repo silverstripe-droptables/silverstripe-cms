@@ -2075,7 +2075,7 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 		$minorActions = new Tab('MoreOptions', 'More options');
 		$moreOptions = new TabSet('MoreOptionsTabSet');
 		$moreOptions->push($minorActions);
-		$moreOptions->addExtraClass('ss-ui-action-tabset');
+		$moreOptions->addExtraClass('ss-ui-action-tabset single');
 
 		// "readonly"/viewing version that isn't the current version of the record
 		$stageOrLiveRecord = Versioned::get_one_by_stage($this->class, Versioned::current_stage(), sprintf('"SiteTree"."ID" = %d', $this->ID));

@@ -61,10 +61,6 @@
 			box-shadow:none;
 			margin-bottom:8px;
 		}
-		.cms-tree-view-modes,
-		.cms-content-batchactions {
-			display: none;
-		}
 		.cms-tree-expand-trigger {
 			display: inline-block;
 			margin:0 0 2px 0;
@@ -77,7 +73,7 @@
 			// Hide badges and drag icons to save space
 			.badge,
 			a > .jstree-icon {
-				display: none;
+			//	display: none;
 			}
 
 			// Show badge on hovered node
