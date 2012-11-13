@@ -626,6 +626,16 @@ class CMSMain extends LeftAndMain implements CurrentPageIdentifier, PermissionPr
 				$actions = $record->getAllCMSActions();
 			} else {
 				$actions = $record->getCMSActions();
+
+				// Find and remove tabs that have no actions.
+				if ($actions && $actions->Count()) {
+					$tabset = $actions->fieldByName('Root');
+					foreach ($tabset->getChildren() as $tab) {
+						if (!$tab->getChildren()->count()) {
+							$tabset->removeByName($tab->getName());
+						}
+					}
+				}
 			}
 
 			// Use <button> to allow full jQuery UI styling
