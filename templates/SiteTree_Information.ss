@@ -1,9 +1,9 @@
 <div class='cms-sitetree-information'>
-	<div><% _t('LASTSAVED', 'Last saved') %> $LastEdited.Ago</div>
+	<p class="meta-info"><% _t('LASTSAVED', 'Last saved') %> $LastEdited.Ago
 	<% if Live %>
-		<div><% _t('LASTPUBLISHED', 'Last published') %> $Live.LastEdited.Ago</div>
+		<br /><% _t('LASTPUBLISHED', 'Last published') %> $Live.LastEdited.Ago
 	<% else %>
-		<div><em><% _t('NOTPUBLISHED', 'Not published') %></em></div>
+		<br /><em><% _t('NOTPUBLISHED', 'Not published') %></em>
 	<% end_if %>
-	<hr>
+	</p>
 </div>
