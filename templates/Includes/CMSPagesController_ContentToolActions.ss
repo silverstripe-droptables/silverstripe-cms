@@ -9,7 +9,6 @@
 		<li class="middle">
 			<input class="batch-check" name="view-mode-batchactions" type="checkbox" />
 			<a href="#Action_Batch" class="tab-nav-link view-mode-batchactions-wrapper">
-				<span class="ui-button-icon-primary ui-icon ui-no-icon"></span>
 				<span class="title"><% _t("CMSPagesController_ContentToolbar.ss.ACTIONS","Actions") %></span>
 			</a>
 		</li>
@@ -20,16 +19,14 @@
 			</a>
 		</li>
 	</ul>	
-	<div id="Action_AddPage" class="ss-ui-action-tab tab ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+	<div id="Action_AddPage" class="ss-ui-action-tab tab ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide first">
 		<a class="cms-page-add-button ss-ui-button ss-ui-action-constructive" data-icon="add" href="$LinkPageAdd" data-url-addpage="{$LinkPageAdd('?ParentID=%s')}"><% _t('CMSMain.AddPage', 'Add Page') %></a>
 	</div>
 	<div id="Action_Batch" class="ss-ui-action-tab tab ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide cms-content-batchactions">
 		$BatchActionsForm
 	</div>
 	<div id="Action_Filter" class="ss-ui-action-tab tab ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="cms-content-tools-CMSPagesController">
-		<div class="cms-panel-content center">
-			$SearchForm
-		</div>
+		$SearchForm
 	</div>
 
 </div>
