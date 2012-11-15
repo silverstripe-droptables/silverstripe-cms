@@ -2081,7 +2081,7 @@ class SiteTree extends DataObject implements PermissionProvider,i18nEntityProvid
 		$majorActions = CompositeField::create()->setName('MajorActions')->setTag('fieldset')->addExtraClass('ss-ui-buttonset');
 		
 		// Minor options are hidden behind a drop-up and appear as links (although they are still FormActions).
-		$rootTabSet = new TabSet('Root');
+		$rootTabSet = new TabSet('ActionMenus');
 		$moreOptions = new Tab('MoreOptions', 'More options');
 		$rootTabSet->push($moreOptions);
 		$rootTabSet->addExtraClass('ss-ui-action-tabset single');
