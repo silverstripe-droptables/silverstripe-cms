@@ -52,21 +52,15 @@
 		display: none; // Don't show trigger in expanded mode
 	}
 }
+.ui-tabs .cms-panel-padded #cms-content-treeview {
+	padding-top: 8px;
+}
 
 // Hide certain elements when shown in "sidebar mode"
 .cms-content-tools { 
 	#cms-content-treeview {
-		.cms-content-toolbar {
-			border-bottom:none;
-			box-shadow:none;
-			margin-bottom:8px;
-		}
-		.cms-tree-view-modes,
-		.cms-content-batchactions {
-			display: none;
-		}
 		.cms-tree-expand-trigger {
-			display: inline-block;
+			display: none;
 			margin:0 0 2px 0;
 			span.ui-button-text{
 					padding-right:8px;
@@ -77,7 +71,7 @@
 			// Hide badges and drag icons to save space
 			.badge,
 			a > .jstree-icon {
-				display: none;
+			//	display: none;
 			}
 
 			// Show badge on hovered node
