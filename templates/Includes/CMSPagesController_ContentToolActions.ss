@@ -20,7 +20,7 @@
 		</li>
 	</ul>	
 	<div id="Action_AddPage" class="ss-ui-action-tab tab ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide first">
-		<a class="cms-page-add-button ss-ui-button ss-ui-action-constructive" data-icon="add" href="$LinkPageAdd" data-url-addpage="{$LinkPageAdd('?ParentID=%s')}"><% _t('CMSMain.AddPage', 'Add Page') %></a>
+		$AddPageForm.AddFormInline
 	</div>
 	<div id="Action_Batch" class="ss-ui-action-tab tab ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide cms-content-batchactions">
 		$BatchActionsForm
