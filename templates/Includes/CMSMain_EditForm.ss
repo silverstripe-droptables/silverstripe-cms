@@ -12,8 +12,8 @@
 			<% loop Fields %>
 				$FieldHolder
 			<% end_loop %>
-			<div class="clear"><!-- --></div>
-		</fieldset>
+			<div class="clear"><!-- --></div>			
+		</fieldset>		
 	</div>
 
 	<div class="cms-content-actions south">
@@ -21,8 +21,7 @@
 		<div class="Actions">
 			<% loop Actions %>
 				$Field
-			<% end_loop %>
-	
+			<% end_loop %>	
 		</div>
 		<% end_if %>
 	</div>

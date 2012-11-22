@@ -97,6 +97,96 @@ class CMSPageAddController extends CMSPageEditController {
 		return $form;
 	}
 
+	public function AddFormInline() {
+		$record = $this->currentPage();
+		
+		$pageTypes = array();
+
+		foreach($this->PageTypes() as $pagetype) {
+			$title = $pagetype->getField('Title');
+			$description = $pagetype->getField('Description');				
+			$pageTypes[$pagetype->getField('ClassName')] = array(
+				'title' => $title,
+				'description' => $description,
+				'pageType' => $pagetype
+ 			);
+		}
+
+
+		//Ensure generic page type shows on top
+		if(isset($pageTypes['Page'])) {
+			$pageTitle = $pageTypes['Page'];
+			$pageTypes = array_merge(array('Page' => $pageTitle), $pageTypes);
+		}
+		
+		$topTitle = _t('CMSPageAddController.ParentMode_top', 'Top level');
+		$childTitle = _t('CMSPageAddController.ParentMode_child', 'Under another page');
+
+		$parentField = new DropdownField("ParentID", "", SiteTree::get()->map());
+
+		$fields = new FieldList(
+			$group = new CompositeField(	
+				$extraLabel = new LabelField('PageModeHeader', _t('CMSMain.CreateNewPage', 'Create a new page')),
+				
+				$parentModeField = new SelectionGroup(
+					"ParentModeField",
+					array(
+						"top//$topTitle" => null, 
+						"child//$childTitle" => $parentField
+					)
+				)
+			),				
+			$typeField = new PageOptionsetField(
+ 				"PageType", 
+ 				_t('CMSMain.TypeofPage', 'Type of Page'), 
+ 				$pageTypes, 
+ 				'Page'
+			)
+	
+		);
+
+		$typeField->addExtraClass('dropdown');
+		$group->addExtraClass('field');
+		$extraLabel->addExtraClass('left');
+
+		// TODO Re-enable search once it allows for HTML title display, 
+		// see http://open.silverstripe.org/ticket/7455
+		// $parentField->setShowSearch(true);
+		$parentModeField->setValue($this->request->getVar('ParentID') ? 'child' : 'top');
+		$parentModeField->addExtraClass('parent-mode');
+
+		// CMSMain->currentPageID() automatically sets the homepage,
+		// which we need to counteract in the default selection (which should default to root, ID=0)
+		$homepageSegment = RootURLController::get_homepage_link();
+		if($record && $record->URLSegment != $homepageSegment) {
+			$parentField->setValue($record->ID);	
+		}
+		
+		$actions = new FieldList(		
+			FormAction::create("doAdd", _t('CMSMain.Create',"Create"))
+				->addExtraClass('ss-ui-action-constructive')->setAttribute('data-icon', 'accept')
+				->setUseButtonTag(true)
+		);
+		
+		$this->extend('updatePageOptions', $fields);
+		
+		$form = new Form($this, "AddForm", $fields, $actions);
+		$form->addExtraClass('cms-add-form cms-edit-form ' . $this->BaseCSSClasses());
+		$form->setTemplate($this->getTemplatesWithSuffix('_EditForm'));
+
+		if($parentID = $this->request->getVar('ParentID')) {
+		 	$form->Fields()->dataFieldByName('ParentID')->setValue((int)$parentID);
+		}
+
+
+
+		return $form;
+	}
+
+
+
+
+
 	public function doAdd($data, $form) {
 		$className = isset($data['PageType']) ? $data['PageType'] : "Page";
 		$parentID = isset($data['ParentID']) ? (int)$data['ParentID'] : 0;

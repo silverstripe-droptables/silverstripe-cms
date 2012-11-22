@@ -684,7 +684,8 @@ class CMSMain extends LeftAndMain implements CurrentPageIdentifier, PermissionPr
 	public function listview($request) {
 		return $this->renderWith($this->getTemplatesWithSuffix('_ListView'));
 	}
-	
+
+
 	/**
 	 * Returns the pages meet a certain criteria as {@see CMSSiteTreeFilter} or the subpages of a parent page
 	 * defaulting to no filter and show all pages in first level.
@@ -1139,6 +1140,11 @@ class CMSMain extends LeftAndMain implements CurrentPageIdentifier, PermissionPr
 	 */
 	public function BatchActionList() {
 		return $this->batchactions()->batchActionList();
+	}
+
+	public function AddPageForm() {
+		$CMSPageAddController = new CMSPageAddController();
+		return $CMSPageAddController;
 	}
 	
 	public function buildbrokenlinks($request) {
