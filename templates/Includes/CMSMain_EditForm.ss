@@ -23,6 +23,7 @@
 				$Field
 			<% end_loop %>
 	
+			<% include LeftAndMain_ViewModeSelector SelectID="preview-mode-dropdown-in-content" %>
 		</div>
 		<% end_if %>
 	</div>
