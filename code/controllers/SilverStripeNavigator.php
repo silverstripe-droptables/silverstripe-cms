@@ -233,7 +233,7 @@ class SilverStripeNavigatorItem_StageLink extends SilverStripeNavigatorItem {
 	}
 
 	public function getTitle() {
-		return _t('ContentController.DRAFTSITE', 'Draft Site', 'Used for the Switch between draft and published view mode. Needs to be a short label');
+		return _t('ContentController.DRAFT', 'Draft', 'Used for the Switch between draft and published view mode. Needs to be a short label');
 	}
 	
 	public function getMessage() {
@@ -281,7 +281,7 @@ class SilverStripeNavigatorItem_LiveLink extends SilverStripeNavigatorItem {
 	}
 
 	public function getTitle() {
-		return _t('ContentController.PUBLISHEDSITE', 'Published Site', 'Used for the Switch between draft and published view mode. Needs to be a short label');
+		return _t('ContentController.PUBLISHED', 'Published', 'Used for the Switch between draft and published view mode. Needs to be a short label');
 	}
 	
 	public function getMessage() {
